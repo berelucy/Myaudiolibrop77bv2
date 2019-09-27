@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "net.berenice.myaudiolibrop77b"
@@ -29,4 +29,5 @@ dependencies {
 
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     androidTestImplementation 'androidx.test:runner:1.2.0'
+
 }

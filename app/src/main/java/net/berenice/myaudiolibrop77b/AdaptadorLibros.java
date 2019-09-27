@@ -17,40 +17,32 @@ public class AdaptadorLibros extends RecyclerView.Adapter<AdaptadorLibros.ViewHo
     protected Vector<Libro> vectorLibros; //Vector con libros a visualizar
     private Context contexto;
 
-
-
-
-
-// es para setear la variable onClickListener
     public void setOnClickListener(View.OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
     }
 
-    private View.OnClickListener onClickListener;
+    private View.OnClickListener onClickListener; // variable de tipo onclicklistener
 
-    public AdaptadorLibros(Context contexto, Vector<Libro> vectorLibros) {
-        inflador = (LayoutInflater) contexto
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.vectorLibros = vectorLibros;
-        this.contexto = contexto;
+    public AdaptadorLibros(Context contexto, Vector<Libro> vectorLibros){
+        this.inflador=(LayoutInflater) contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.vectorLibros=vectorLibros;
+        this.contexto=contexto;
     }
 
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View v = inflador.inflate(R.layout.elemento_selector, null);
-        //viewholder es la clase que se creó, es la instacia de cada elemnento que se muestra,
-        // la v muestra todo el layout
-        //
-        v.setOnClickListener(this.onClickListener);
+        View v = inflador.inflate(R.layout.elemento_selector,null); //comvierte un layaout en un view
+        v.setOnClickListener(this.onClickListener);//se le esta asignando un escuchador a cada elemneto de la lista
+        v.setOnLongClickListener(onLongClickListener);
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Libro libro = vectorLibros.elementAt(position);
+        //Libro libro = vectorLibros.elementAt(position);
+        Libro libro = vectorLibros.get(position);
         holder.portada.setImageResource(libro.recursoImagen);
         holder.titulo.setText(libro.titulo);
     }
@@ -62,7 +54,6 @@ public class AdaptadorLibros extends RecyclerView.Adapter<AdaptadorLibros.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView portada;
-
         public TextView titulo;
 
         public ViewHolder(View itemView) {
@@ -73,5 +64,10 @@ public class AdaptadorLibros extends RecyclerView.Adapter<AdaptadorLibros.ViewHo
         }
     }
 
+    private View.OnLongClickListener onLongClickListener;
+
+    public void setOnItemLongClickListener(View.OnLongClickListener onLongClickListener) {
+        this.onLongClickListener = onLongClickListener;
+    }
 
 }
